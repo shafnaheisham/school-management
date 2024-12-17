@@ -1,0 +1,65 @@
+{% extends 'library-base.html' %}
+
+{% block title %}User Registration{% endblock %}
+
+{% block content %}
+    <!-- Dashboard Content -->
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Librarian Dashboard</h1>
+
+        <div class="row">
+            <!-- Add Books -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header">Add Books</div>
+                    <div class="card-body text-center">
+                        <p class="card-text">Add new books to the library inventory.</p>
+                        <form action="library-add-books/" method="POST" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Add Books </button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lend Books -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header">Lend Books</div>
+                    <div class="card-body text-center">
+                        <p class="card-text">Issue books to students.</p>
+                        <form action="issue-books/" method="POST" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Issue </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View Lending History -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-header">Book Lending History</div>
+                    <div class="card-body text-center">
+                        <p class="card-text">View the history of book lendings.</p>
+                        <form action="issue-books/" method="GET" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">View Issued Books </button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <p class="mb-0">Library Management System &copy; {{ year }}</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endblock%}

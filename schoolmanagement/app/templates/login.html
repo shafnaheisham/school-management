@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management System - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        body {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            font-family: 'Arial', sans-serif;
+        }
+        .card {
+            border-radius: 15px;
+            background-color: #ffffff;
+            padding: 30px;
+        }
+        .btn-primary {
+            background-color: #4facfe;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #00c6fb;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .form-select, input[type="text"], input[type="password"] {
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .form-select:focus, input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #4facfe;
+            box-shadow: 0 0 5px rgba(79, 172, 254, 0.5);
+        }
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+        .text-center a {
+            color: #4facfe;
+            text-decoration: none;
+        }
+        .text-center a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+        <div class="card shadow-lg" style="width: 400px;">
+            <div class="card-body">
+                <h3 class="card-title text-center mb-4">School Management Login</h3>
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="userType" class="form-label">Login As</label>
+                        <select id="userType" name="user_type" class="form-select" required>
+                            <option value="" disabled selected>Select user type</option>
+                            <option value="admin">Admin</option>
+                            <option value="office_staff">Office Staff</option>
+                            <option value="librarian">Librarian</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" name="username" id="username" class="form-control" placeholder="Enter your username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                    {% if messages %}
+                        <p class="error-message">{{ messages }}</p>
+                    {% endif %}
+                </form>
+                <div class="text-center mt-3">
+                    <p>Forgot password? <a href="/forgot-password">Click here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFy47YS5mvg3pvhUZZApWMOsuCXbiWB9sPH0JW3fN3I5dnt8Md7z4ycE+z" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+{% extends 'library-base.html' %}
+
+{% block title %}User Registration{% endblock %}
+
+{% block content %}
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Issue a Book</h1>
+        
+        <!-- Alerts for Success or Error Messages -->
+        {% if message %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        
+        <!-- Form to Issue a Book -->
+        <form action=" {% url 'issue-books' %}" method="post">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="book_id" class="form-label">Book ID</label>
+                    <input type="text" id="book_id" name="book_id" class="form-control" placeholder="Enter Book ID" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="stud_id" class="form-label">Student ID</label>
+                    <input type="text" id="stud_id" name="stud_id" class="form-control" placeholder="Enter Student ID" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="borrow_date" class="form-label">Borrow date</label>
+                    <input type="date" id="borrow_date" name="borrow_date" class="form-control" placeholder="Borrow date" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="due_date" class="form-label">Due date</label>
+                    <input type="date" id="due_date" name="due_date" class="form-control" placeholder="Borrow date" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="returned_date" class="form-label">Returned date</label>
+                    <input type="date" id="returned_date" name="returned_date" class="form-control" placeholder="Borrow date" required>
+                </div>
+                <div>
+                {% comment %} <label for="status" class="form-label">Status</label> {% endcomment %}
+                {% comment %} <select id="status" name="status" class="form-select" required>
+                    <option value="" disabled selected>Returned </option>
+                    <option value="Returned">Returned</option>
+                    <option value="Not Returned">Not Returned</option>
+                </select> {% endcomment %}
+            </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Issue Book</button>
+        </form>
+        
+        <!-- Display Validation Errors -->
+       
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endblock %}

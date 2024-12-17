@@ -1,0 +1,60 @@
+{% extends 'admin-base.html' %}
+
+{% block title %}User Registration{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center mb-4">Admin Dashboard</h1>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm" style="background-color:rgb(103, 194, 125);">
+                    <div class="card-body">
+                        <h5 class="card-title">Student Page</h5>
+                        <p class="card-text">Manage and view student details.</p>
+                        <form action="studentregister/" method="POST" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Add New Student</button>
+                        </form>
+                        <form action="studentregister/" method="GET" style="display: inline;">
+                
+                            <button type="submit" class="btn btn-primary" style="background-color:rgb(241, 190, 20);">View Student</button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm" style="background-color:rgb(103, 194, 125);">
+                    <div class="card-body">
+                        <h5 class="card-title">Office Staff Page</h5>
+                        <p class="card-text">Manage and view office staff details.</p>
+                        <!-- Button to trigger POST method -->
+                        <form action="userregistration/" method="POST" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Add New Staff</button>
+                        </form>
+                        <!-- Button for GET method -->
+                        <form action="userregistration/" method="GET" style="display: inline;">
+                            <button type="submit" class="btn btn-primary" style="background-color:rgb(241, 190, 20);">View Staff</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card text-center shadow-sm" style="background-color:rgb(103, 194, 125);">
+                    <div class="card-body">
+                        <h5 class="card-title">Library</h5>
+                        <p class="card-text">View library resources.</p>
+                        <form action="view-lending-history/" method="GET" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary" style="background-color:rgb(241, 190, 20);">View Library </button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}    

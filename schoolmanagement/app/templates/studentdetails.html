@@ -1,0 +1,79 @@
+{% extends 'admin-base.html' %}
+
+{% block title %}User Registration{% endblock %}
+
+{% block content %}
+
+    <div class="container py-5">
+        <h1 class="text-center mb-4">Student Details</h1>
+        {% if messages %}
+    <div>
+    {% for message in messages %}
+        <p class="message {{ message.tags }}">{{ message }}</p>
+    {% endfor %}
+    </div>
+    {% endif %}
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        
+                        <th>Student ID</th>
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th>Division</th>
+                        <th>Date of Birth</th>
+                        <th>Gender</th>
+                        <th>Address</th>
+                        
+                        <th>Phone</th>
+                        
+                        <th>Admission Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example Row -->
+                    <tr>
+                        {% for student in students %}
+                        <td>{{ student.stud_id }}</td>
+                        <td>{{student.name}}</td>
+                        <td>{{student.class_name}}</td>
+                        <td>{{student.division}}</td>
+                        <td>{{student.date_of_birth}}</td>
+                        <td>{{student.gender}}</td>
+                        <td>{{student.address}}</td>
+                        <td>{{student.parent_contact}}</td>
+                        
+                        <td>{{student.admission_date}}</td>
+                        
+                       
+                        
+                        <td>
+                            <form action="{{ student.stud_id }}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="_method" value="PATCH">  <!-- Custom method for PATCH -->
+                                <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+                            </form>
+                            <form action="/studentregister/{{ student.stud_id }}" method="post" onsubmit="return confirm('Are you sure you want to delete this Student')">
+                                {% csrf_token %}
+                                <input type="hidden" name="_method" value="DELETE">  <!-- Custom method for DELETE -->
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        
+                            
+                        </td>
+                    </tr>
+                    <!-- End Example Row -->
+                     {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFy47YS5mvg3pvhUZZApWMOsuCXbiWB9sPH0JW3fN3I5dnt8Md7z4ycE+z" crossorigin="anonymous"></script>
+</body>
+</html>
+{% endblock %}

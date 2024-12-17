@@ -1,0 +1,70 @@
+{% extends 'library-base.html' %}
+
+{% block title %}User Registration{% endblock %}
+
+{% block content %}
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Library Lending History</h1>
+
+        <!-- Lending History Table -->
+        <div class="table-wrapper">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>StudentID</th>
+                        <th>Book Title</th>
+                        <th>Borrow Date</th>
+                        <th>Due Date</th>
+                        <th>Returned Date</th>
+                        <th>Status</th>
+                        <th>Fine</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in history %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ record.stud_id }}</td>
+                        <td>{{ record.book_id }}</td>
+                        <td>{{ record.borrow_date }}</td>
+                        <td>{{ record.due_date }}</td>
+                        <td>{{ record.returned_date|default:"Not Returned" }}</td>
+                        <td>{{ record.status }}</td>
+                        <td>{{ record.fine }}</td>
+                    
+                    <td>
+                        <form action="{%% 'issue-book' }" method="GET">
+                            {% csrf_token %}
+                            <input type="hidden" name="_method" value="PATCH">  <!-- Custom method for PATCH -->
+                            <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+                        </form>
+                        <form action="ssue-books/" method="DELETE" onsubmit="return confirm('Are you sure you want to delete this user?')">
+                            {% csrf_token %}
+                            <input type="hidden" name="_method" value="DELETE">  <!-- Custom method for DELETE -->
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                    {% empty %}
+                    
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center mt-4">
+            {{ pagination }}
+        </div>
+    </div>
+
+    <footer class="text-center mt-5 py-3 bg-light">
+        <p class="mb-0">Library Management System &copy; {{ year }}</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endblock %}
